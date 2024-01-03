@@ -23,6 +23,7 @@ mixin _$Todo {
   String get time => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   String get color => throw _privateConstructorUsedError;
+  bool get isChecked => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $TodoCopyWith<$Res> {
   factory $TodoCopyWith(Todo value, $Res Function(Todo) then) =
       _$TodoCopyWithImpl<$Res, Todo>;
   @useResult
-  $Res call({String time, String text, String color});
+  $Res call({String time, String text, String color, bool isChecked});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
     Object? time = null,
     Object? text = null,
     Object? color = null,
+    Object? isChecked = null,
   }) {
     return _then(_value.copyWith(
       time: null == time
@@ -67,6 +69,10 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as String,
+      isChecked: null == isChecked
+          ? _value.isChecked
+          : isChecked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -78,7 +84,7 @@ abstract class _$$TodoImplCopyWith<$Res> implements $TodoCopyWith<$Res> {
       __$$TodoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String time, String text, String color});
+  $Res call({String time, String text, String color, bool isChecked});
 }
 
 /// @nodoc
@@ -94,6 +100,7 @@ class __$$TodoImplCopyWithImpl<$Res>
     Object? time = null,
     Object? text = null,
     Object? color = null,
+    Object? isChecked = null,
   }) {
     return _then(_$TodoImpl(
       time: null == time
@@ -108,6 +115,10 @@ class __$$TodoImplCopyWithImpl<$Res>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as String,
+      isChecked: null == isChecked
+          ? _value.isChecked
+          : isChecked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -116,7 +127,10 @@ class __$$TodoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TodoImpl implements _Todo {
   const _$TodoImpl(
-      {required this.time, required this.text, required this.color});
+      {required this.time,
+      required this.text,
+      required this.color,
+      this.isChecked = false});
 
   factory _$TodoImpl.fromJson(Map<String, dynamic> json) =>
       _$$TodoImplFromJson(json);
@@ -127,10 +141,13 @@ class _$TodoImpl implements _Todo {
   final String text;
   @override
   final String color;
+  @override
+  @JsonKey()
+  final bool isChecked;
 
   @override
   String toString() {
-    return 'Todo(time: $time, text: $text, color: $color)';
+    return 'Todo(time: $time, text: $text, color: $color, isChecked: $isChecked)';
   }
 
   @override
@@ -140,12 +157,14 @@ class _$TodoImpl implements _Todo {
             other is _$TodoImpl &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.text, text) || other.text == text) &&
-            (identical(other.color, color) || other.color == color));
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.isChecked, isChecked) ||
+                other.isChecked == isChecked));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, time, text, color);
+  int get hashCode => Object.hash(runtimeType, time, text, color, isChecked);
 
   @JsonKey(ignore: true)
   @override
@@ -165,7 +184,8 @@ abstract class _Todo implements Todo {
   const factory _Todo(
       {required final String time,
       required final String text,
-      required final String color}) = _$TodoImpl;
+      required final String color,
+      final bool isChecked}) = _$TodoImpl;
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$TodoImpl.fromJson;
 
@@ -175,6 +195,8 @@ abstract class _Todo implements Todo {
   String get text;
   @override
   String get color;
+  @override
+  bool get isChecked;
   @override
   @JsonKey(ignore: true)
   _$$TodoImplCopyWith<_$TodoImpl> get copyWith =>

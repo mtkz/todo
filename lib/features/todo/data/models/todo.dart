@@ -9,6 +9,7 @@ class Todo with _$Todo {
     required String time,
     required String text,
     required String color,
+    @Default(false) bool isChecked,
   }) = _Todo;
 
   factory Todo.fromJson(Map<String, Object?> json) => _$TodoFromJson(json);

@@ -10,6 +10,7 @@ _$TodoImpl _$$TodoImplFromJson(Map<String, dynamic> json) => _$TodoImpl(
       time: json['time'] as String,
       text: json['text'] as String,
       color: json['color'] as String,
+      isChecked: json['isChecked'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$TodoImplToJson(_$TodoImpl instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$$TodoImplToJson(_$TodoImpl instance) =>
       'time': instance.time,
       'text': instance.text,
       'color': instance.color,
+      'isChecked': instance.isChecked,
     };

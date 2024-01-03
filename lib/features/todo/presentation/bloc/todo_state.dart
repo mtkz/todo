@@ -1,6 +1,23 @@
 part of 'todo_bloc.dart';
 
-@immutable
-sealed class TodoState {}
+enum Status { loading, success, failure }
 
-final class TodoInitial extends TodoState {}
+class TodoState {
+  TodoState({
+    this.status = Status.loading,
+    this.todos = const [],
+  });
+
+  final Status status;
+  final List<Todo>? todos;
+
+  TodoState copyWith({
+    Status? status,
+    List<Todo>? todos,
+  }) {
+    return TodoState(
+      status: status ?? this.status,
+      todos: todos ?? this.todos,
+    );
+  }
+}
