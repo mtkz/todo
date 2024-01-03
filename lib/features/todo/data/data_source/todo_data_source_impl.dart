@@ -30,7 +30,7 @@ class TodoDataSourceImpl extends TodoDataSource {
     ];
     // try {
     //   final response = await dioInstance.get(
-    //     'https://run.mocky.io/v3/edb59dac-61d0-48d8-aec6-567dc9f7262e',
+    //     'edb59dac-61d0-48d8-aec6-567dc9f7262e',
     //   );
 
     //   if (response.statusCode == HttpStatus.ok) {
