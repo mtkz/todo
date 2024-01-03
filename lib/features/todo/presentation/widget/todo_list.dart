@@ -25,6 +25,7 @@ class TodoList extends StatelessWidget {
                   onTap: () {
                     context.read<TodoBloc>().add(TodoToggle(todo: todo));
                   },
+                  color: todo.color,
                 );
               }),
         );

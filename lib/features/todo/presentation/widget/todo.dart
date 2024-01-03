@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/core/extensions/color_extension.dart';
 
 class Todo extends StatelessWidget {
   const Todo({
@@ -8,18 +9,20 @@ class Todo extends StatelessWidget {
     required this.date,
     required this.isChecked,
     required this.onTap,
+    required this.color,
   });
 
   final String title;
   final String date;
   final bool isChecked;
+  final String color;
   final GestureTapCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.red,
+        color: HexColor.fromHex('#$color'),
         borderRadius: BorderRadius.circular(16),
       ),
       height: 60,

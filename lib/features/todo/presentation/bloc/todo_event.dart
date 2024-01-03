@@ -10,3 +10,9 @@ class TodoToggle extends TodoEvent {
 
   TodoToggle({required this.todo});
 }
+
+class TodoDateSelect extends TodoEvent {
+  final int selectedDateIndex;
+
+  TodoDateSelect({required this.selectedDateIndex});
+}

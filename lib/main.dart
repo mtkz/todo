@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todo/core/di/service_locator.dart';
 import 'package:todo/features/todo/presentation/page/todo_page.dart';
 
-void main() {
+void main() async{
+  await setupLocator();
   runApp(const MyApp());
 }
 

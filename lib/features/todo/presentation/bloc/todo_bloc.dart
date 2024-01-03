@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/features/todo/data/models/todo.dart';
-import 'package:todo/features/todo/data/repository/todo_repository_impl.dart';
+import 'package:todo/features/todo/domain/repository/todo_repository.dart';
 
 part 'todo_event.dart';
 part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
-  final TodoRepositoryImpl todoRepository = TodoRepositoryImpl();
+  final TodoRepository todoRepository;
 
-  TodoBloc() : super(TodoState()) {
+  TodoBloc({required this.todoRepository}) : super(TodoState()) {
     on<TodoInit>(_onInitTodos);
     on<TodoToggle>(_onTodoToggle);
+    on<TodoDateSelect>(_onTodoDateSelect);
   }
   Future<void> _onInitTodos(TodoInit event, Emitter<TodoState> emit) async {
     final List<Todo> todos = await todoRepository.getTodos();
@@ -31,5 +32,10 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
       emit(state.copyWith(todos: updatedtodos));
     }
+  }
+
+  Future<void> _onTodoDateSelect(
+      TodoDateSelect event, Emitter<TodoState> emit) async {
+    emit(state.copyWith(selectedDate: event.selectedDateIndex));
   }
 }
