@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:todo/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:todo/features/todo/presentation/widget/todo_body.dart';
 
@@ -13,7 +14,8 @@ class TodoWidget extends StatelessWidget {
     return BlocBuilder<TodoBloc, TodoState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) => switch (state.status) {
-        Status.loading => const Center(child: CircularProgressIndicator()),
+        Status.loading =>
+          const Skeletonizer(enabled: true, child: TodoWidgetBody(),),
         _ => const TodoWidgetBody()
       },
     );

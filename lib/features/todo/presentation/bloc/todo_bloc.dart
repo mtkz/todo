@@ -1,15 +1,17 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:todo/features/todo/data/models/todo.dart';
 import 'package:todo/features/todo/domain/repository/todo_repository.dart';
 
 part 'todo_event.dart';
 part 'todo_state.dart';
 
+part 'todo_bloc.freezed.dart';
+
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final TodoRepository todoRepository;
 
-  TodoBloc({required this.todoRepository}) : super(TodoState()) {
+  TodoBloc({required this.todoRepository}) : super(const TodoState()) {
     on<TodoInit>(_onInitTodos);
     on<TodoToggle>(_onTodoToggle);
     on<TodoDateSelect>(_onTodoDateSelect);
@@ -25,12 +27,16 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         state.todos!.indexWhere((element) => element.color == event.todo.color);
 
     if (todoIndex != -1) {
-      final updatedtodos = state.todos;
+      // Create a copy of the todos list
+      final List<Todo> updatedTodos = List.from(state.todos!);
 
-      updatedtodos![todoIndex] = updatedtodos[todoIndex]
-          .copyWith(isChecked: !updatedtodos[todoIndex].isChecked);
+      // Update the specific todo item
+      updatedTodos[todoIndex] = updatedTodos[todoIndex].copyWith(
+        isChecked: !updatedTodos[todoIndex].isChecked,
+      );
 
-      emit(state.copyWith(todos: updatedtodos));
+      // Emit the updated state with the new todos list
+      emit(state.copyWith(todos: updatedTodos));
     }
   }
 

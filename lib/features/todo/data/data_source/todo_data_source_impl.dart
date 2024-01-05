@@ -6,6 +6,8 @@ import 'package:todo/features/todo/domain/data_source/todo_data_source.dart';
 class TodoDataSourceImpl extends TodoDataSource {
   @override
   Future<List<Todo>> getTodos() async {
+
+    await Future.delayed(const Duration(seconds: 5));
     return [
       const Todo(
         time: "2021-11-20T10:09:42.157",
